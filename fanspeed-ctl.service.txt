@@ -1,0 +1,13 @@
+[Unit]
+Description=fanspeed-ctrl
+After=lm_sensors.service
+Requires=lm_sensors.service
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/fanspeed-ctl
+Restart=always
+RestartSec=3s
+
+[Install]
+WantedBy=multi-user.target
