@@ -1,0 +1,73 @@
+{
+  "versionId": "4.1",
+  "testModeEnable": 0,
+  "referenceTrackerType": "WritePhase",
+  "remoteUdsAddress": "/var/run/ptp4l",
+  "localUdsAddress": "/var/run/pcm4l",
+
+  "phc4lConfig":
+  {
+      "dcoDevice": "/dev/ptp4",
+      "tsDevice": "/dev/ptp2",
+      "charDevice": "/dev/rsmu0",
+      
+      "phaseSnapDelaySeconds": 3,
+      "tsDeviceAlignmentDisable": 0
+  },
+  
+  "deviceConfig":
+  {
+      "oscillatorType": "MiniOcxo",
+      "dpll1588Instance": 2,
+      "holdover":
+      {
+          "enable": 1,
+          "holdoverType": "Software",
+          "holdoverLossPhysicalOosEnable": 0,
+          "holdoverTimeoutSeconds": 3600,
+          "unqualifiedTimeoutSeconds": 7200,
+          "outOfSpecUserDefinedFrequencyOffsetEnable": 0,
+          "outOfSpecUserDefinedFrequencyOffsetPpb": 0
+      }
+  },
+
+  "profileConfig":
+  {
+      "physicalPllClockCategory": 5,
+      "physicalPllClockCategoryThreshold": 1,
+      "physicalPllInstance": 1,
+      "physicalPllWaitToRestoreTimeoutValue": 10
+  },
+  
+  "loggerConfig":
+  {
+      "stdoutLog":
+      {
+          "selectionMask": "0000000000011111",
+          "_description_": "        | ||||||___ 0: Sync error                ",
+          "_description_": "        | |||||____ 1: Sync warning              ",
+          "_description_": "        | ||||_____ 2: Sync analysis             ",
+          "_description_": "        | |||______ 3: Error                     ",
+          "_description_": "        | ||_______ 4: Warning                   ",
+          "_description_": "        | |________ 5: Debug                     ",
+          "_description_": "        |__________ 7: Timestamp                 "
+      }
+  },
+  
+  "instanceConfig":
+  [
+      {
+          "correctionFieldEnable": 1,
+          "lostMasterTimeoutMilliseconds": 2000,
+          
+          "trackerConfig":
+          {
+            "writePhasePostSnapDelaySeconds": 5,
+            "timeLockThresholdNanoseconds": 100,
+            "willCorrectFrequencyAtFirstSnap": 1,
+            "frequencyLockThresholdPpb": 16.0, 
+            "lockFilterWindowLengthSeconds": 1.0
+          }
+      }
+  ]
+}
